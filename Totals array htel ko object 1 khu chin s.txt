@@ -1,0 +1,5 @@
+Totals array htel ko object 1 khu chin si a yin htae
+object htel mhr Id,Price shi dl
+foreach.Loop pat ml pee yin Price twy ko update ya ml pee yin render loat
+delete mhr ka Delete loat tae ID nae loop pat pee htwt lr tae object htel ka nae tuu ny yin splice nae pyn remove
+toatl ko render pyn loat
