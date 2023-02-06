@@ -60,12 +60,30 @@ let arrSum =((Totals)=>{
 
 console.log(arrSum(Totals));
 console.log(typeof arrSum(Totals));
-let tableRow = '<tr><td id="id" class="pad px-4" style="padding:10px;"><li class="ms-3"></li>'+'</td> <td class="pad px-5" style="padding: 10px;">'+Product+'</td> <td class="pad px-4" style="padding: 10px;text-align:center">'+ Quantity.toLocaleString() +'</td> <td id="total" class="pad px-5" style="padding: 10px;text-align:center">'+ Result+'</td><td class="pad px-3" style="padding: 10px"><img id="edit" src="./edit.png"><img id="delete" src="./bin.png"></td>+'+'</tr>'
+let tableRow = '<tr><td id="id" class="pad px-4" style="padding:10px;"><li class="ms-3"></li>'+'</td><td style="display: none">'+ID+'</td> <td class="pad px-5" style="padding: 10px;">'+Product+'</td> <td class="pad px-4" style="padding: 10px;text-align:center">'+ Quantity.toLocaleString() +'</td><td style="display: none">'+Price+'</td> <td id="total" class="pad px-5" style="padding: 10px;text-align:center">'+ Result+'</td><td class="pad px-3" style="padding: 10px"><img id="edit" src="./edit.png"><img id="delete" src="./bin.png"></td>+'+'</tr>'
 $('tbody').prepend(tableRow);
 // console.log(priceArr);
 
 $("#edit").click(function(){
-  $("#modal").modal("show")
+  $("#modal").modal("show");
+  var currentRow=$(this).closest("tr");
+    total.ID = $("input[name='id']").val(currentRow.find("td:eq(1)").text());
+    total.Product = $("input[name='product']").val(currentRow.find("td:eq(2)").text());
+    total.Quantity = $("input[name='quantity']").val(currentRow.find("td:eq(3)").text());
+    total.Price = $("input[name='price']").val(currentRow.find("td:eq(4)").text());
+  $(this).closest("tr").remove();
+  let editValue = Totals.findIndex(Totals=> Totals.ID == total.ID)
+  if (editValue !== -1){
+    total.ID = $("input[name='id']").val();
+    total.Product = $("input[name='product']").val();
+    total.Quantity = $("input[name='quantity']").val();
+    total.Price = $("input[name='price']").val(); 
+    Totals.splice(editValue,1)
+    console.log(jQuery.hasData(ID)); 
+  }
+  // let tableRow = '<tr><td id="id" class="pad px-4" style="padding:10px;"><li class="ms-3"></li>'+'</td> <td class="pad px-5" style="padding: 10px;">'+Product+'</td> <td class="pad px-4" style="padding: 10px;text-align:center">'+ Quantity.toLocaleString() +'</td> <td id="total" class="pad px-5" style="padding: 10px;text-align:center">'+ Result+'</td><td class="pad px-3" style="padding: 10px"><img id="edit" src="./edit.png"><img id="delete" src="./bin.png"></td>+'+'</tr>'
+  // $('tbody').prepend(tableRow);
+  console.log(total.Quantity);
 })
 
 $("#delete").click(function(){
@@ -127,29 +145,6 @@ $("#input").on("keyup", function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
