@@ -1,4 +1,5 @@
 $('document').ready(function(){
+  $("#update").hide();
   $('#clearSearch').hide();
   $("input").keypress(function(){
     $('#clearSearch').show() 
@@ -8,6 +9,8 @@ $('document').ready(function(){
 
 $("document").ready(function () {
   $("#btn").click(function(){
+  $("input[id='add']").show();
+  $("#update").hide();
      $("#modal").modal("show")
   })
 });
@@ -64,8 +67,12 @@ let tableRow = '<tr><td id="id" class="pad px-4" style="padding:10px;"><li class
 $('tbody').prepend(tableRow);
 // console.log(priceArr);
 
-$("#edit").click(function(){
+$("#edit").click(function(e){
+  $("input[id='add']").hide();
+  $("#update").show();
+  e.preventDefault();
   $("#modal").modal("show");
+
   var currentRow=$(this).closest("tr");
     total.ID = $("input[name='id']").val(currentRow.find("td:eq(1)").text());
     total.Product = $("input[name='product']").val(currentRow.find("td:eq(2)").text());
@@ -84,6 +91,19 @@ $("#edit").click(function(){
   // let tableRow = '<tr><td id="id" class="pad px-4" style="padding:10px;"><li class="ms-3"></li>'+'</td> <td class="pad px-5" style="padding: 10px;">'+Product+'</td> <td class="pad px-4" style="padding: 10px;text-align:center">'+ Quantity.toLocaleString() +'</td> <td id="total" class="pad px-5" style="padding: 10px;text-align:center">'+ Result+'</td><td class="pad px-3" style="padding: 10px"><img id="edit" src="./edit.png"><img id="delete" src="./bin.png"></td>+'+'</tr>'
   // $('tbody').prepend(tableRow);
   console.log(total.Quantity);
+})
+
+
+$("#update").click(function(){
+  console.log("complete updated");
+        let tableRow = '<tr><td id="id" class="pad px-4" style="padding:10px;"><li class="ms-3"></li>'+'</td><td style="display: none">'+ID+'</td> <td class="pad px-5" style="padding: 10px;">'+Product+'</td> <td class="pad px-4" style="padding: 10px;text-align:center">'+ Quantity.toLocaleString() +'</td><td style="display: none">'+Price+'</td> <td id="total" class="pad px-5" style="padding: 10px;text-align:center">'+ Result+'</td><td class="pad px-3" style="padding: 10px"><img id="edit" src="./edit.png"><img id="delete" src="./bin.png"></td>+'+'</tr>'
+      $('tbody').prepend(tableRow);
+      $("input[name='id']").val("");
+      $("input[name='product']").val("");
+      $("input[name='quantity']").val("");  
+      $("input[name='price']").val(""); 
+      $("#modal").modal("hide");
+        
 })
 
 $("#delete").click(function(){
